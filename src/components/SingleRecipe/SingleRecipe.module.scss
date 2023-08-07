@@ -1,0 +1,25 @@
+.container {
+    position: relative;
+    color: rgba(255,255,255,.7);
+    font-size: 2rem;
+    font-family: sans-serif;
+    counter-increment: boxes;
+    padding: 100px; 
+
+    &:nth-child(1) {
+        grid-column: span 2;
+        grid-row: span 2;
+    }
+
+    &:nth-child(3) {
+        grid-row: span 3;
+        grid-column: span 3;
+    }
+
+    background-size: 100%;
+    transition: all .3s ease-in-out;
+
+    &:hover {
+        background-size: 104%;
+    }
+}

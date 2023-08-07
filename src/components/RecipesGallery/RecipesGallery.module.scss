@@ -1,0 +1,11 @@
+.galleryGrid {
+    max-width: 100%;
+    display: grid;
+    margin: 0 auto;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    grid-auto-rows: 1fr;
+    grid-auto-flow: row dense;
+    grid-gap: 10px;
+    counter-reset: boxes;
+   
+}
