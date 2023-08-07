@@ -13,7 +13,7 @@ function RecipesGallery() {
 
     const getAllRecipes = async () => {
         try {
-            const { data } = await axios.get('http://localhost:3001/recipes');
+            const { data } = await axios.get('https://chef-ai-sxiz.onrender.com/recipes');
             snap.recipes = data;
             setRecipes(Array.from(snap.recipes));
         } catch (error) {

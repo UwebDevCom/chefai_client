@@ -22,7 +22,7 @@ function CreateRecipe() {
 
     const getAllIngredients = async () => {
         try {
-            const { data } = await axios.get('http://localhost:3001/ingredients');
+            const { data } = await axios.get('https://chef-ai-sxiz.onrender.com/ingredients');
             snap.ingredients = data;
             setIngredients(data);
         } catch (error) {
@@ -32,7 +32,7 @@ function CreateRecipe() {
 
     const createRecipe = async () => {
         try {
-            await axios.post('http://localhost:3001/recipes',
+            await axios.post('https://chef-ai-sxiz.onrender.com/recipes',
             { ...generatedRecipe }, { headers: { authorization: cookies.access_token } });
             navigate('/');
         } catch (error) {
@@ -42,7 +42,7 @@ function CreateRecipe() {
 
     const generateRecipe = async () => {
         try {
-            const { data } = await axios.post('http://localhost:3001/generate-recipe',
+            const { data } = await axios.post('https://chef-ai-sxiz.onrender.com/generate-recipe',
             { ingredients: selectedIngredients }, { headers: { authorization: cookies.access_token } });
             console.log(data.prompt)
             setGeneratedRecipe({ name: data.prompt.title,
