@@ -24,13 +24,14 @@ const Login = () => {
     event.preventDefault();
 
     try {
-      const result = await axios.post("http://localhost:3001/auth/login", {
+      const result = await axios.post("https://chef-ai-sxiz.onrender.com/auth/login", {
         username,
         password,
       });
 
       setCookies("access_token", result.data.token);
-      window.localStorage.setItem("userID", result.data.userID);
+      console.log(result.data);
+      window.localStorage.setItem("userId", result.data.userID);
       navigate("/");
     } catch (error) {
       console.error(error);
@@ -75,7 +76,7 @@ const Register = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      await axios.post("http://localhost:3001/auth/register", {
+      await axios.post("https://chef-ai-sxiz.onrender.com/auth/register", {
         username,
         password,
       });

@@ -9,6 +9,7 @@ import axios from 'axios';
 import { Button } from '@mui/material';
 import { useCookies } from 'react-cookie';
 import { useNavigate } from "react-router-dom";
+import { useGetUserId } from "../../hooks/useGetUserId";
 
 function CreateRecipe() {
     const [ingredients, setIngredients] = React.useState([]);
@@ -17,7 +18,8 @@ function CreateRecipe() {
     const [cookies, setCookies] = useCookies(['access_token']);
     const snap = useProxy(state);
     const navigate = useNavigate();
-    
+    const userId = useGetUserId();
+
     const getAllIngredients = async () => {
         try {
             const { data } = await axios.get('http://localhost:3001/ingredients');
@@ -28,7 +30,7 @@ function CreateRecipe() {
         }
     };
 
-    const saveRecipe = async () => {
+    const createRecipe = async () => {
         try {
             await axios.post('http://localhost:3001/recipes',
             { ...generatedRecipe }, { headers: { authorization: cookies.access_token } });
@@ -38,11 +40,19 @@ function CreateRecipe() {
         }
     }
 
-    const createRecipe = async () => {
+    const generateRecipe = async () => {
         try {
             const { data } = await axios.post('http://localhost:3001/generate-recipe',
             { ingredients: selectedIngredients }, { headers: { authorization: cookies.access_token } });
-            setGeneratedRecipe({...data.prompt, image_url: data.image_url})
+            console.log(data.prompt)
+            setGeneratedRecipe({ name: data.prompt.title,
+                description: data.prompt.description,
+                ingredients: data.prompt.ingredients,
+                instructions: data.prompt.instructions,
+                imageUrl: data.image_url,
+                cookingTime: data.prompt.cookingTime,
+                userOwner: userId });
+
         } catch (error) {
             console.log(error);
         }
@@ -55,7 +65,8 @@ function CreateRecipe() {
 
     useEffect(() => {
         getAllIngredients();
-    }, []);
+        console.log(generatedRecipe)
+    }, [generatedRecipe]);
 
     return (
         <div className={style.createRecipeWrapper}>
@@ -79,8 +90,8 @@ function CreateRecipe() {
                 </Stack>
                 <div className={style.centerdBtn}>
                     { generatedRecipe
-                    ? <Button variant="contained" onClick={saveRecipe}>Save Recipe</Button>
-                    : <Button variant="contained" onClick={createRecipe}>Generate Recipe</Button> }
+                    ? <Button variant="contained" onClick={createRecipe}>Save Recipe</Button>
+                    : <Button variant="contained" onClick={generateRecipe}>Generate Recipe</Button> }
                 </div>
             </div>}
         </div>
