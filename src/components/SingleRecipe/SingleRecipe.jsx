@@ -1,19 +1,25 @@
 import React, { useEffect, useState } from 'react';
 import style from './SingleRecipe.module.scss';
-import demoRecipe from '../../assets/example-recipe.jpg'
 
-function SingleRecipe({ recipe }) {
+import RecipeHeader from './RecipeHeader';
+
+function SingleRecipe({ recipe, randomizeSize }) {
     const [img, setImg] = useState(null);
+
     useEffect(() => {
         try {
-            setImg(require('../../assets/' + recipe._id + '_img.jpg'));
+            setImg(require('../../assets/' + (recipe.name).replaceAll(' ', '_').replaceAll(',', '') + '.jpg'));
         } catch (error) {
             console.log(error);
-            setImg(demoRecipe);
-        }
-    }, [img]);
+            setImg(recipe.imageUrl);
+        } finally {
 
-    return (img && <div style={{ backgroundImage: `url(${img})` }} className={style.container}>{ }</div>);
+        }
+    }, [recipe]);
+
+    return (img && <div style={{ backgroundImage: `url(${img})`, gridColumn: 'span ' + randomizeSize, gridRow: 'span ' + randomizeSize }} className={style.container}>
+        <RecipeHeader title={recipe.name} />
+    </div>);
 }
 
 export default SingleRecipe;

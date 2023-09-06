@@ -1,25 +1,35 @@
 .container {
     position: relative;
-    color: rgba(255,255,255,.7);
+    color: rgba(255, 255, 255, .7);
     font-size: 2rem;
     font-family: sans-serif;
-    counter-increment: boxes;
-    padding: 100px; 
-
-    &:nth-child(1) {
-        grid-column: span 2;
-        grid-row: span 2;
-    }
-
-    &:nth-child(3) {
-        grid-row: span 3;
-        grid-column: span 3;
-    }
-
+    padding: 100px;
     background-size: 100%;
     transition: all .3s ease-in-out;
 
     &:hover {
         background-size: 104%;
+    }
+}
+
+.recipeHeader {
+    position: absolute;
+    top: 10px;
+    left: 0;
+    background-color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: .8rem;
+    margin: 10px;
+
+    span {
+        font-size: .8rem;
+        font-weight: 700;
+        color: #3e3e3e;
+        font-style: italic;
+
+        &.emoji {
+            font-style: normal;
+        }
     }
 }

@@ -11,16 +11,16 @@ import { createBrowserRouter, createRoutesFromElements, Outlet, Route, RouterPro
 const router = createBrowserRouter(createRoutesFromElements(
   <Route element={<Home />} errorElement={<ErrorPage />}>
     <Route index path="/" />
-    <Route path="/create-recipe" index element={<CreateRecipe />} />
-    <Route path="/saved-recipe" index element={<SavedRecipe />} />
-    <Route path="/recipes/:id" element={<Recipe />} />
-    <Route path="/auth" index element={<Auth />} />
+    {/* <Route path="/create-recipe" index element={<CreateRecipe />} /> */}
+    {/* <Route path="/saved-recipe" index element={<SavedRecipe />} /> */}
+    {/* <Route path="/recipes/:id" element={<Recipe />} /> */}
+    {/* <Route path="/auth" index element={<Auth />} /> */}
   </Route>
 ))
 
 function App() {
   return (
-      <RouterProvider router={router} />
+    <RouterProvider router={router} />
   );
 }
 
